@@ -1,11 +1,28 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, StatusBar } from 'react-native'
+import { Text, View, Image, StatusBar, Animated, Easing } from 'react-native'
 import { Font, LinearGradient } from 'expo'
 import SwipeableViews from 'react-swipeable-views-native'
 
 export default class App extends React.Component {
   state = {
     fontsLoaded: false,
+    speurTranslateX: new Animated.Value(0),
+  }
+
+  animateSwipe(index, indexLatest) {
+    if (indexLatest == 0) {
+      Animated.timing(this.state.speurTranslateX, {
+        duration: 150,
+        easing: Easing.back(),
+        toValue: -75,
+      }).start()
+    } else if (index == 0) {
+      Animated.timing(this.state.speurTranslateX, {
+        duration: 500,
+        easing: Easing.elastic(),
+        toValue: 0,
+      }).start()
+    }
   }
 
   async componentDidMount() {
@@ -23,7 +40,7 @@ export default class App extends React.Component {
       <LinearGradient colors={['#ff3c64', '#fa6e55']} start={[0.0, 0.0]} end={[0.75, 0.75]} style={{ flex: 1 }}>
         <StatusBar hidden={true} />
 
-        <SwipeableViews>
+        <SwipeableViews onChangeIndex={(index, indexLatest) => this.animateSwipe(index, indexLatest)}>
           <View style={{
             flex: 1,
             justifyContent: 'space-between',
@@ -68,10 +85,11 @@ export default class App extends React.Component {
               </View>
             </View>
 
-            <Image source={require('./img/speuren.png')} style={{
+            <Animated.Image source={require('./img/speuren.png')} style={{
               bottom: -30,
               position: 'absolute',
               right: -75,
+              transform: [{ translateX: this.state.speurTranslateX }],
             }} />
           </View>
           <View style={{
