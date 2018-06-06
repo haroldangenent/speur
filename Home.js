@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, View, Image, Animated, Easing } from 'react-native'
+import { container } from './styles'
 
 export default class Home extends React.Component {
   state = {
@@ -24,13 +25,10 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <View style={{
+      <View style={[container, {
         flex: 1,
         justifyContent: 'space-between',
-        padding: 30,
-        paddingBottom: 60,
-        paddingTop: 80,
-      }}>
+      }]}>
         <View>
           <Text style={{
             color: 'white',

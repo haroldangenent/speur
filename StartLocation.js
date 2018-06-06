@@ -1,14 +1,11 @@
 import React from 'react'
 import { Text, View } from 'react-native'
+import { container } from './styles'
 
 export default class StartLocation extends React.Component {
   render() {
     return (
-      <View style={{
-        padding: 30,
-        paddingBottom: 60,
-        paddingTop: 80,
-      }}>
+      <View style={container}>
         <Text style={{
           color: 'white',
           fontFamily: 'work-sans-extra-bold',
