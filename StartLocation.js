@@ -1,12 +1,16 @@
 import React from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text, Animated, Easing } from 'react-native'
 import Button from './components/Button'
 import Container from './components/Container'
 import Title from './components/Title'
 import { MapView } from 'expo'
 
 export default class StartLocation extends React.Component {
-  state = { mapActive: false, start: null }
+  state = {
+    mapActive: false,
+    mapTranslateX: new Animated.Value(200),
+    start: null
+  }
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(position => this.setState({
@@ -17,6 +21,22 @@ export default class StartLocation extends React.Component {
         longitudeDelta: 0.04,
       },
     }))
+  }
+
+  transitionIn() {
+    Animated.timing(this.state.mapTranslateX, {
+      duration: 400,
+      easing: Easing.elastic(),
+      toValue: 0,
+    }).start()
+  }
+
+  transitionOut() {
+    Animated.timing(this.state.mapTranslateX, {
+      duration: 150,
+      easing: Easing.back(),
+      toValue: 200,
+    }).start()
   }
 
   setMapMode(active = true) {
@@ -53,11 +73,12 @@ export default class StartLocation extends React.Component {
             )}
           </View>
         </Container>
-        <View style={{
+        <Animated.View style={{
           flexGrow: 1,
           shadowColor: 'black',
           shadowRadius: 10,
           shadowOpacity: 0.1,
+          transform: [{ translateX: this.state.mapTranslateX }],
         }}>
           {!this.state.mapActive && (
             <TouchableOpacity onPress={() => this.setMapMode()} style={{
@@ -78,7 +99,7 @@ export default class StartLocation extends React.Component {
               <MapView.Marker coordinate={this.state.start} />
             )}
           </MapView>
-        </View>
+        </Animated.View>
       </View>
     )
   }
