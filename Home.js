@@ -3,10 +3,10 @@ import { Text, View, Image, Animated, Easing } from 'react-native'
 import Container from './components/Container'
 import Title from './components/Title'
 
+const imageOffset = 75
+
 export default class Home extends React.Component {
-  state = {
-    speurTranslateX: new Animated.Value(0),
-  }
+  state = { speurTranslateX: new Animated.Value(0) }
 
   transitionIn() {
     Animated.timing(this.state.speurTranslateX, {
@@ -20,7 +20,7 @@ export default class Home extends React.Component {
     Animated.timing(this.state.speurTranslateX, {
       duration: 150,
       easing: Easing.back(),
-      toValue: -75,
+      toValue: -imageOffset,
     }).start()
   }
 
@@ -65,7 +65,7 @@ export default class Home extends React.Component {
         <Animated.Image source={require('./img/speuren.png')} style={{
           bottom: -30,
           position: 'absolute',
-          right: -75,
+          right: -imageOffset,
           transform: [{ translateX: this.state.speurTranslateX }],
         }} />
       </Container>
