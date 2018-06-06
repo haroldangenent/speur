@@ -6,7 +6,7 @@ import Title from './components/Title'
 import { MapView } from 'expo'
 
 export default class StartLocation extends React.Component {
-  state = { mapActive: false }
+  state = { mapActive: false, start: null }
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(position => this.setState({
@@ -67,11 +67,17 @@ export default class StartLocation extends React.Component {
               zIndex: 1,
             }}><View></View></TouchableOpacity>
           )}
+          
           <MapView
             initialRegion={this.state.userLocation}
+            onPress={event => this.setState({ start: event.nativeEvent.coordinate })}
             showsUserLocation={true}
             style={{ flexGrow: 1 }}
-          ></MapView>
+          >
+            {this.state.start && (
+              <MapView.Marker coordinate={this.state.start} />
+            )}
+          </MapView>
         </View>
       </View>
     )
