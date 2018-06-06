@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, Image, Animated, Easing } from 'react-native'
-import { container } from './styles'
+import Container from './components/Container'
+import Title from './components/Title'
 
 export default class Home extends React.Component {
   state = {
@@ -25,17 +26,12 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <View style={[container, {
+      <Container style={{
         flex: 1,
         justifyContent: 'space-between',
-      }]}>
+      }}>
         <View>
-          <Text style={{
-            color: 'white',
-            fontFamily: 'work-sans-extra-bold',
-            fontSize: 56,
-            marginBottom: 25,
-          }}>Hallo!</Text>
+          <Title>Hallo!</Title>
           <Text style={{
             color: 'white',
             fontFamily: 'work-sans-extra-light',
@@ -72,7 +68,7 @@ export default class Home extends React.Component {
           right: -75,
           transform: [{ translateX: this.state.speurTranslateX }],
         }} />
-      </View>
+      </Container>
     )
   }
 }

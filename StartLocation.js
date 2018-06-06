@@ -1,18 +1,14 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { container } from './styles'
+import { Text } from 'react-native'
+import Container from './components/Container'
+import Title from './components/Title'
 
 export default class StartLocation extends React.Component {
   render() {
     return (
-      <View style={container}>
-        <Text style={{
-          color: 'white',
-          fontFamily: 'work-sans-extra-bold',
-          fontSize: 56,
-          marginBottom: 25,
-        }}>Wat is je startpunt?</Text>
-      </View>
+      <Container>
+        <Title>Wat is je startpunt?</Title>
+      </Container>
     )
   }
 }
