@@ -8,6 +8,17 @@ import { MapView } from 'expo'
 export default class StartLocation extends React.Component {
   state = { mapActive: false }
 
+  componentWillMount() {
+    navigator.geolocation.getCurrentPosition(position => this.setState({
+      userLocation: {
+        latitude: position.coords.latitude,
+        latitudeDelta: 0.04,
+        longitude: position.coords.longitude,
+        longitudeDelta: 0.04,
+      },
+    }))
+  }
+
   setMapMode(active = true) {
     this.setState({ mapActive: active })
 
@@ -56,7 +67,11 @@ export default class StartLocation extends React.Component {
               zIndex: 1,
             }}><View></View></TouchableOpacity>
           )}
-          <MapView style={{ flexGrow: 1 }} />
+          <MapView
+            initialRegion={this.state.userLocation}
+            showsUserLocation={true}
+            style={{ flexGrow: 1 }}
+          ></MapView>
         </View>
       </View>
     )
