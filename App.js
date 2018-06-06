@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, StatusBar, Animated, Easing } from 'react-native'
+import { StatusBar } from 'react-native'
 import { Font, LinearGradient } from 'expo'
 import SwipeableViews from 'react-swipeable-views-native'
 import Home from './Home'

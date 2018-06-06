@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, StatusBar, Animated, Easing } from 'react-native'
+import { Text, View, Image, Animated, Easing } from 'react-native'
 
 export default class Home extends React.Component {
   state = {

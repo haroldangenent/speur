@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, StatusBar, Animated, Easing } from 'react-native'
+import { Text, View } from 'react-native'
 
 export default class StartLocation extends React.Component {
   render() {
