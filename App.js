@@ -27,6 +27,7 @@ export default class App extends React.Component {
         paddingTop: 80,
       }}>
         <StatusBar hidden={true} />
+
         <View>
           <Text style={{
             color: 'white',
@@ -42,13 +43,28 @@ export default class App extends React.Component {
             width: 300,
           }}>Zullen we een leuke spørtocht maken?</Text>
         </View>
-        <Text style={{
-          color: 'white',
-          fontFamily: this.state.fontsLoaded ? 'work-sans-semi-bold' : null,
-          fontSize: 26,
-          lineHeight: 34,
-          width: 180,
-        }}>Swipe om te beginnen</Text>
+
+        <View>
+          <Text style={{
+            color: 'white',
+            fontFamily: this.state.fontsLoaded ? 'work-sans-semi-bold' : null,
+            fontSize: 26,
+            lineHeight: 34,
+            marginBottom: 15,
+            width: 180,
+          }}>Swipe om te beginnen</Text>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+          }}>
+            <Image source={require('./img/swipe-left.png')} style={{
+              marginRight: 15,
+            }} />
+            <Image source={require('./img/hand.png')} />
+          </View>
+        </View>
+
         <Image source={require('./img/speuren.png')} style={{
           bottom: -30,
           position: 'absolute',
