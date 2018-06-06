@@ -7,18 +7,11 @@ import StartLocation from './StartLocation'
 
 export default class App extends React.Component {
   components = []
-  state = { fontsLoaded: false }
-  screens = [Home, StartLocation]
-
-  transition(index, indexLatest) {
-    if (typeof this.components[indexLatest].transitionOut === "function") { 
-      this.components[indexLatest].transitionOut()
-    }
-
-    if (typeof this.components[index].transitionIn === "function") { 
-      this.components[index].transitionIn()
-    }
+  state = {
+    disableSwipe: false,
+    fontsLoaded: false,
   }
+  screens = [Home, StartLocation]
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -30,19 +23,33 @@ export default class App extends React.Component {
     this.setState({ fontsLoaded: true })
   }
 
+  disableSwipe() {
+    this.setState({ disableSwipe: true })
+  }
+
   render() {
     return (
       <LinearGradient colors={['#ff3c64', '#fa6e55']} start={[0.0, 0.0]} end={[0.75, 0.75]} style={{ flex: 1 }}>
         <StatusBar hidden={true} />
 
         {this.state.fontsLoaded && (
-          <SwipeableViews onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
+          <SwipeableViews disabled={this.state.disableSwipe} onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
             {this.screens.map((Component, index) => (
-              <Component key={index} ref={component => this.components.push(component)} />
+              <Component key={index} ref={component => this.components.push(component)} onDisableSwipe={() => this.disableSwipe()} />
             ))}
           </SwipeableViews>
         )}
       </LinearGradient>
     )
+  }
+
+  transition(index, indexLatest) {
+    if (typeof this.components[indexLatest].transitionOut === "function") { 
+      this.components[indexLatest].transitionOut()
+    }
+
+    if (typeof this.components[index].transitionIn === "function") { 
+      this.components[index].transitionIn()
+    }
   }
 }
