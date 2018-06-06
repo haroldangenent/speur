@@ -27,6 +27,10 @@ export default class App extends React.Component {
     this.setState({ disableSwipe: true })
   }
 
+  enableSwipe() {
+    this.setState({ disableSwipe: false })
+  }
+
   render() {
     return (
       <LinearGradient colors={['#ff3c64', '#fa6e55']} start={[0.0, 0.0]} end={[0.75, 0.75]} style={{ flex: 1 }}>
@@ -35,7 +39,11 @@ export default class App extends React.Component {
         {this.state.fontsLoaded && (
           <SwipeableViews disabled={this.state.disableSwipe} onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
             {this.screens.map((Component, index) => (
-              <Component key={index} ref={component => this.components.push(component)} onDisableSwipe={() => this.disableSwipe()} />
+              <Component
+                key={index}
+                onDisableSwipe={() => this.disableSwipe()}
+                onEnableSwipe={() => this.enableSwipe()}
+                ref={component => this.components.push(component)} />
             ))}
           </SwipeableViews>
         )}

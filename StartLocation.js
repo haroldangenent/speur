@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
+import Button from './components/Button'
 import Container from './components/Container'
 import Title from './components/Title'
 import { MapView } from 'expo'
@@ -7,9 +8,14 @@ import { MapView } from 'expo'
 export default class StartLocation extends React.Component {
   state = { mapActive: false }
 
-  setMapMode() {
-    this.setState({ mapActive: true })
-    this.props.onDisableSwipe()
+  setMapMode(active = true) {
+    this.setState({ mapActive: active })
+
+    if (active) {
+      this.props.onDisableSwipe()
+    } else {
+      this.props.onEnableSwipe()
+    }
   }
 
   render() {
@@ -22,11 +28,19 @@ export default class StartLocation extends React.Component {
         } : {
           flexBasis: '50%',
         }}>
-          <Title style={this.state.mapActive ? {
-            fontSize: 28,
-            lineHeight: 33,
-            marginBottom: 0,
-          } : {}}>{this.state.mapActive ? 'Startpunt' : 'Wat is je startpunt?'}</Title>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+            <Title style={this.state.mapActive ? {
+              fontSize: 28,
+              lineHeight: 33,
+              marginBottom: 0,
+            } : {}}>{this.state.mapActive ? 'Startpunt' : 'Wat is je startpunt?'}</Title>
+            {this.state.mapActive && (
+              <Button onPress={() => this.setMapMode(false)}>Ok</Button>
+            )}
+          </View>
         </Container>
         <View style={{
           flexGrow: 1,
