@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Animated, Easing } from 'react-native'
 import Button from './components/Button'
 import Container from './components/Container'
 import Title from './components/Title'
+import SwipeIcon from './components/SwipeIcon'
 import { MapView } from 'expo'
 
 export default class PickLocation extends React.Component {
@@ -72,6 +73,10 @@ export default class PickLocation extends React.Component {
               <Button onPress={() => this.setMapMode(false)}>Ok</Button>
             )}
           </View>
+
+          {!this.state.mapActive && this.state.location && (
+            <SwipeIcon />
+          )}
         </Container>
         <Animated.View style={{
           flexGrow: 1,
