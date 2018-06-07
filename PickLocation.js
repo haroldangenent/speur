@@ -9,7 +9,7 @@ export default class PickLocation extends React.Component {
   state = {
     mapActive: false,
     mapTranslateX: new Animated.Value(200),
-    start: null
+    location: null
   }
 
   componentWillMount() {
@@ -91,12 +91,12 @@ export default class PickLocation extends React.Component {
           
           <MapView
             initialRegion={this.state.userLocation}
-            onPress={event => this.setState({ start: event.nativeEvent.coordinate })}
+            onPress={event => this.setState({ location: event.nativeEvent.coordinate })}
             showsUserLocation={true}
             style={{ flexGrow: 1 }}
           >
-            {this.state.start && (
-              <MapView.Marker coordinate={this.state.start} />
+            {this.state.location && (
+              <MapView.Marker coordinate={this.state.location} />
             )}
           </MapView>
         </Animated.View>
