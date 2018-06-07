@@ -16,8 +16,7 @@ export default class StartLocation extends React.Component {
         title: 'Wat is je startpunt?',
         shortTitle: 'Startpunt',
       }}
-      onDisableSwipe={this.props.onDisableSwipe}
-      onEnableSwipe={this.props.onEnableSwipe}
+      setDisableMode={this.props.setDisableMode}
       ref={picker => this.picker = picker} />
   }
 }

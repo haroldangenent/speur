@@ -44,9 +44,9 @@ export default class PickLocation extends React.Component {
     this.setState({ mapActive: active })
 
     if (active) {
-      this.props.onDisableSwipe()
+      this.props.setDisableMode(true)
     } else {
-      this.props.onEnableSwipe()
+      this.props.setDisableMode(false)
     }
   }
 

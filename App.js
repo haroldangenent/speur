@@ -9,7 +9,7 @@ import EndLocation from './EndLocation'
 export default class App extends React.Component {
   components = []
   state = {
-    disableSwipe: false,
+    disableMode: false,
     fontsLoaded: false,
   }
   screens = [Home, StartLocation, EndLocation]
@@ -24,26 +24,17 @@ export default class App extends React.Component {
     this.setState({ fontsLoaded: true })
   }
 
-  disableSwipe() {
-    this.setState({ disableSwipe: true })
-  }
-
-  enableSwipe() {
-    this.setState({ disableSwipe: false })
-  }
-
   render() {
     return (
       <LinearGradient colors={['#ff3c64', '#fa6e55']} start={[0.0, 0.0]} end={[0.75, 0.75]} style={{ flex: 1 }}>
         <StatusBar hidden={true} />
 
         {this.state.fontsLoaded && (
-          <SwipeableViews disabled={this.state.disableSwipe} onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
+          <SwipeableViews disabled={this.state.disableMode} onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
             {this.screens.map((Component, index) => (
               <Component
                 key={index}
-                onDisableSwipe={() => this.disableSwipe()}
-                onEnableSwipe={() => this.enableSwipe()}
+                setDisableMode={disableMode => this.setState({ disableMode })}
                 ref={component => this.components.push(component)} />
             ))}
           </SwipeableViews>
