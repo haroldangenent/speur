@@ -7,10 +7,16 @@ import StartLocation from './StartLocation'
 import EndLocation from './EndLocation'
 
 export default class App extends React.Component {
+  components = [
+    { View: Home },
+    { View: StartLocation, onChange: startLocation => this.setState({ startLocation }) },
+    { View: EndLocation, validate: () => this.state.startLocation },
+  ]
   screens = []
   state = {
     disableMode: false,
     fontsLoaded: false,
+    startLocation: false,
   }
 
   async componentDidMount() {
@@ -30,9 +36,9 @@ export default class App extends React.Component {
 
         {this.state.fontsLoaded && (
           <SwipeableViews disabled={this.state.disableMode} onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
-            <Home setDisableMode={disableMode => this.setState({ disableMode })} ref={component => this.screens.push(component)} />
-            <StartLocation setDisableMode={disableMode => this.setState({ disableMode })} ref={component => this.screens.push(component)} />
-            <EndLocation setDisableMode={disableMode => this.setState({ disableMode })} ref={component => this.screens.push(component)} />
+            {this.components.filter(({ validate }) => !validate || validate()).map(({ View, onChange }, index) => (
+              <View key={index} setDisableMode={disableMode => this.setState({ disableMode })} onChange={onChange} ref={component => this.screens[index] = component} />
+            ))}
           </SwipeableViews>
         )}
       </LinearGradient>

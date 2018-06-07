@@ -16,6 +16,7 @@ export default class EndLocation extends React.Component {
         title: 'Wat is je eindpunt?',
         shortTitle: 'Eindpunt',
       }}
+      onChange={this.props.onChange}
       setDisableMode={this.props.setDisableMode}
       ref={picker => this.picker = picker} />
   }

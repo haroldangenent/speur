@@ -40,6 +40,14 @@ export default class PickLocation extends React.Component {
     }).start()
   }
 
+  setLocation(location) {
+    this.setState({ location })
+
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(location)
+    }
+  }
+
   setMapMode(active = true) {
     this.setState({ mapActive: active })
 
@@ -96,7 +104,7 @@ export default class PickLocation extends React.Component {
           
           <MapView
             initialRegion={this.state.userLocation}
-            onPress={event => this.setState({ location: event.nativeEvent.coordinate })}
+            onPress={event => this.setLocation(event.nativeEvent.coordinate)}
             showsUserLocation={true}
             style={{ flexGrow: 1 }}
           >
