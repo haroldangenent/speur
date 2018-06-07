@@ -7,12 +7,11 @@ import StartLocation from './StartLocation'
 import EndLocation from './EndLocation'
 
 export default class App extends React.Component {
-  components = []
+  screens = []
   state = {
     disableMode: false,
     fontsLoaded: false,
   }
-  screens = [Home, StartLocation, EndLocation]
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -31,12 +30,9 @@ export default class App extends React.Component {
 
         {this.state.fontsLoaded && (
           <SwipeableViews disabled={this.state.disableMode} onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
-            {this.screens.map((Component, index) => (
-              <Component
-                key={index}
-                setDisableMode={disableMode => this.setState({ disableMode })}
-                ref={component => this.components.push(component)} />
-            ))}
+            <Home setDisableMode={disableMode => this.setState({ disableMode })} ref={component => this.screens.push(component)} />
+            <StartLocation setDisableMode={disableMode => this.setState({ disableMode })} ref={component => this.screens.push(component)} />
+            <EndLocation setDisableMode={disableMode => this.setState({ disableMode })} ref={component => this.screens.push(component)} />
           </SwipeableViews>
         )}
       </LinearGradient>
@@ -44,12 +40,12 @@ export default class App extends React.Component {
   }
 
   transition(index, indexLatest) {
-    if (typeof this.components[indexLatest].transitionOut === "function") { 
-      this.components[indexLatest].transitionOut()
+    if (typeof this.screens[indexLatest].transitionOut === "function") { 
+      this.screens[indexLatest].transitionOut()
     }
 
-    if (typeof this.components[index].transitionIn === "function") { 
-      this.components[index].transitionIn()
+    if (typeof this.screens[index].transitionIn === "function") { 
+      this.screens[index].transitionIn()
     }
   }
 }
