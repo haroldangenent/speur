@@ -4,6 +4,7 @@ import { Font, LinearGradient } from 'expo'
 import SwipeableViews from 'react-swipeable-views-native'
 import Home from './Home'
 import StartLocation from './StartLocation'
+import EndLocation from './EndLocation'
 
 export default class App extends React.Component {
   components = []
@@ -11,7 +12,7 @@ export default class App extends React.Component {
     disableSwipe: false,
     fontsLoaded: false,
   }
-  screens = [Home, StartLocation]
+  screens = [Home, StartLocation, EndLocation]
 
   async componentDidMount() {
     await Font.loadAsync({
