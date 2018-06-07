@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, Image, Animated, Easing } from 'react-native'
 import Container from './components/Container'
 import Title from './components/Title'
+import SwipeIcon from './components/SwipeIcon'
 
 const imageOffset = 75
 
@@ -50,16 +51,7 @@ export default class Home extends React.Component {
             marginBottom: 15,
             width: 180,
           }}>Swipe om te beginnen</Text>
-          <View style={{
-            alignItems: 'center',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-          }}>
-            <Image source={require('./img/swipe-left.png')} style={{
-              marginRight: 15,
-            }} />
-            <Image source={require('./img/hand.png')} />
-          </View>
+          <SwipeIcon />
         </View>
 
         <Animated.Image source={require('./img/speuren.png')} style={{
