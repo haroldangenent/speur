@@ -12,6 +12,10 @@ export default class StartLocation extends React.Component {
 
   render() {
     return <PickLocation
+      labels={{
+        title: 'Wat is je startpunt?',
+        shortTitle: 'Startpunt',
+      }}
       onDisableSwipe={this.props.onDisableSwipe}
       onEnableSwipe={this.props.onEnableSwipe}
       ref={picker => this.picker = picker} />

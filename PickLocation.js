@@ -67,7 +67,7 @@ export default class PickLocation extends React.Component {
               fontSize: 28,
               lineHeight: 33,
               marginBottom: 0,
-            } : {}}>{this.state.mapActive ? 'Startpunt' : 'Wat is je startpunt?'}</Title>
+            } : {}}>{this.state.mapActive ? this.props.labels.shortTitle : this.props.labels.title}</Title>
             {this.state.mapActive && (
               <Button onPress={() => this.setMapMode(false)}>Ok</Button>
             )}
