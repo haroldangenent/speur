@@ -7,7 +7,7 @@ export default class StartLocation extends React.Component {
   }
 
   transitionOut() {
-    this.picker.transitionIn()
+    this.picker.transitionOut()
   }
 
   render() {
