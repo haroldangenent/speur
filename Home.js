@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, Animated, Easing } from 'react-native'
+import { Text, View, Animated, Easing } from 'react-native'
 import Container from './components/Container'
 import Title from './components/Title'
 import SwipeIcon from './components/SwipeIcon'

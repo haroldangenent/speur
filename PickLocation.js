@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity, Text, Animated, Easing } from 'react-native'
+import { View, TouchableOpacity, Animated, Easing } from 'react-native'
 import Button from './components/Button'
 import Container from './components/Container'
 import Title from './components/Title'
