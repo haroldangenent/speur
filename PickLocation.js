@@ -24,20 +24,34 @@ export default class PickLocation extends React.Component {
     }))
   }
 
-  transitionIn() {
-    Animated.timing(this.state.mapTranslateX, {
-      duration: 400,
-      easing: Easing.elastic(),
-      toValue: 0,
-    }).start()
+  transitionIn(fromRight) {
+    const start = () => 
+      Animated.timing(this.state.mapTranslateX, {
+        duration: 400,
+        easing: Easing.elastic(),
+        toValue: 0,
+      }).start()
+
+    if (fromRight) {
+      this.setState({ mapTranslateX: new Animated.Value(-200) }, start)
+    } else {
+      start()
+    }
   }
 
-  transitionOut() {
-    Animated.timing(this.state.mapTranslateX, {
-      duration: 150,
-      easing: Easing.back(),
-      toValue: 200,
-    }).start()
+  transitionOut(toLeft) {
+    const start = toValue =>
+      Animated.timing(this.state.mapTranslateX, {
+        duration: 150,
+        easing: Easing.back(),
+        toValue,
+      }).start()
+
+    if (toLeft) {
+      start(200)
+    } else {
+      start(-200)
+    }
   }
 
   setLocation(location) {

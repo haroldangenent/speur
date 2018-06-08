@@ -47,11 +47,11 @@ export default class App extends React.Component {
 
   transition(index, indexLatest) {
     if (typeof this.screens[indexLatest].transitionOut === "function") { 
-      this.screens[indexLatest].transitionOut()
+      this.screens[indexLatest].transitionOut(index - indexLatest < 0)
     }
 
     if (typeof this.screens[index].transitionIn === "function") { 
-      this.screens[index].transitionIn()
+      this.screens[index].transitionIn(index - indexLatest < 0)
     }
   }
 }

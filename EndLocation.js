@@ -2,12 +2,12 @@ import React from 'react'
 import PickLocation from './PickLocation'
 
 export default class EndLocation extends React.Component {
-  transitionIn() {
-    this.picker.transitionIn()
+  transitionIn(fromRight) {
+    this.picker.transitionIn(fromRight)
   }
 
-  transitionOut() {
-    this.picker.transitionOut()
+  transitionOut(toLeft) {
+    this.picker.transitionOut(toLeft)
   }
 
   render() {
