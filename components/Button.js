@@ -1,5 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
+import { colors } from '../variables'
 
 export default ({ children, onPress }) => (
   <TouchableOpacity onPress={onPress} style={{
@@ -10,7 +11,7 @@ export default ({ children, onPress }) => (
     paddingVertical: 7,
   }}>
     <Text style={{
-      color: '#fa6e55',
+      color: colors.orange,
       fontFamily: 'work-sans-semi-bold',
     }}>{children.toUpperCase()}</Text>
   </TouchableOpacity>

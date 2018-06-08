@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views-native'
 import Home from './Home'
 import StartLocation from './StartLocation'
 import EndLocation from './EndLocation'
+import { colors } from './variables'
 
 export default class App extends React.Component {
   components = [
@@ -31,7 +32,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <LinearGradient colors={['#ff3c64', '#fa6e55']} start={[0.0, 0.0]} end={[0.75, 0.75]} style={{ flex: 1 }}>
+      <LinearGradient colors={[colors.pink, colors.orange]} start={[0.0, 0.0]} end={[0.75, 0.75]} style={{ flex: 1 }}>
         <StatusBar hidden={true} />
 
         {this.state.fontsLoaded && (
