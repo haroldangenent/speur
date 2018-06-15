@@ -7,12 +7,12 @@ import Subtitle from './components/Subtitle'
 import SwipeIcon from './components/SwipeIcon'
 
 export default class PreAssignments extends React.Component {
-  transitionIn() {
-    this.image.transitionIn()
+  transitionIn(fromRight) {
+    this.image.transitionIn(fromRight)
   }
 
-  transitionOut() {
-    this.image.transitionOut()
+  transitionOut(toLeft) {
+    this.image.transitionOut(toLeft)
   }
 
   render() {

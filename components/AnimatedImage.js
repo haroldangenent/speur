@@ -4,20 +4,36 @@ import { Animated, Easing } from 'react-native'
 export default class AnimatedImage extends React.Component {
   state = { translateX: new Animated.Value(0) }
 
-  transitionIn() {
-    Animated.timing(this.state.translateX, {
-      duration: 500,
-      easing: Easing.elastic(),
-      toValue: 0,
-    }).start()
+  transitionIn(fromRight) {
+    const start = () => {
+      Animated.timing(this.state.translateX, {
+        duration: 500,
+        easing: Easing.elastic(),
+        toValue: 0,
+      }).start()
+    }
+
+    if (fromRight) {
+      start()
+    } else {
+      this.setState({ translateX: new Animated.Value(200) }, start)
+    }
   }
 
-  transitionOut() {
-    Animated.timing(this.state.translateX, {
-      duration: 150,
-      easing: Easing.back(),
-      toValue: this.props.offset.right,
-    }).start()
+  transitionOut(toLeft) {
+    const start = toValue => {
+      Animated.timing(this.state.translateX, {
+        duration: 150,
+        easing: Easing.back(),
+        toValue: toValue,
+      }).start()
+    }
+
+    if (toLeft) {
+      start(200)
+    } else {
+      start(this.props.offset.right)
+    }
   }
 
   render() {
