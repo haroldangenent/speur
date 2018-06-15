@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import Container from './components/Container'
 import Title from './components/Title'
+import Subtitle from './components/Subtitle'
 import AnimatedImage from './components/AnimatedImage'
 import SwipeIcon from './components/SwipeIcon'
 
@@ -22,13 +23,7 @@ export default class Home extends React.Component {
       }}>
         <View>
           <Title>Hallo!</Title>
-          <Text style={{
-            color: 'white',
-            fontFamily: 'work-sans-extra-light',
-            fontSize: 48,
-            lineHeight: 57,
-            width: 300,
-          }}>Zullen we een leuke spørtocht maken?</Text>
+          <Subtitle>Zullen we een leuke spørtocht maken?</Subtitle>
         </View>
 
         <View>
