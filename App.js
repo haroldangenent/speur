@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views-native'
 import Home from './Home'
 import StartLocation from './StartLocation'
 import EndLocation from './EndLocation'
+import PreAssignments from './PreAssignments'
 import { colors } from './variables'
 
 export default class App extends React.Component {
@@ -12,6 +13,7 @@ export default class App extends React.Component {
     { View: Home },
     { View: StartLocation, onChange: startLocation => this.setState({ startLocation }) },
     { View: EndLocation, onChange: endLocation => this.setState({ endLocation }), validate: () => this.state.startLocation },
+    { View: PreAssignments, validate: () => this.state.endLocation },
   ]
   screens = []
   state = {
