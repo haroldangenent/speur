@@ -11,9 +11,23 @@ import { colors } from './variables'
 export default class App extends React.Component {
   components = [
     { View: Home },
-    { View: StartLocation, onChange: startLocation => this.setState({ startLocation }) },
-    { View: EndLocation, onChange: endLocation => this.setState({ endLocation }), validate: () => this.state.startLocation },
-    { View: PreAssignments, validate: () => this.state.endLocation },
+    {
+      View: StartLocation,
+      props: {
+        onChange: startLocation => this.setState({ startLocation })
+      },
+    },
+    {
+      View: EndLocation,
+      props: {
+        onChange: endLocation => this.setState({ endLocation }),
+      },
+      validate: () => this.state.startLocation
+    },
+    {
+      View: PreAssignments,
+      validate: () => this.state.endLocation
+    },
   ]
   screens = []
   state = {
@@ -40,8 +54,13 @@ export default class App extends React.Component {
 
         {this.state.fontsLoaded && (
           <SwipeableViews disabled={this.state.disableMode} onChangeIndex={(index, indexLatest) => this.transition(index, indexLatest)}>
-            {this.components.filter(({ validate }) => !validate || validate()).map(({ View, onChange }, index) => (
-              <View key={index} setDisableMode={disableMode => this.setState({ disableMode })} onChange={onChange} ref={component => this.screens[index] = component} />
+            {this.components.filter(({ validate }) => !validate || validate()).map(({ View, props }, index) => (
+              <View
+                key={index}
+                setDisableMode={disableMode => this.setState({ disableMode })}
+                ref={component => this.screens[index] = component}
+                {...props}
+              />
             ))}
           </SwipeableViews>
         )}
