@@ -1,28 +1,17 @@
 import React from 'react'
-import { Text, View, Animated, Easing } from 'react-native'
+import { Text, View } from 'react-native'
 import Container from './components/Container'
 import Title from './components/Title'
+import AnimatedImage from './components/AnimatedImage'
 import SwipeIcon from './components/SwipeIcon'
 
-const imageOffset = 75
-
 export default class Home extends React.Component {
-  state = { speurTranslateX: new Animated.Value(0) }
-
   transitionIn() {
-    Animated.timing(this.state.speurTranslateX, {
-      duration: 500,
-      easing: Easing.elastic(),
-      toValue: 0,
-    }).start()
+    this.image.transitionIn()
   }
 
   transitionOut() {
-    Animated.timing(this.state.speurTranslateX, {
-      duration: 150,
-      easing: Easing.back(),
-      toValue: -imageOffset,
-    }).start()
+    this.image.transitionOut()
   }
 
   render() {
@@ -54,12 +43,11 @@ export default class Home extends React.Component {
           <SwipeIcon />
         </View>
 
-        <Animated.Image source={require('./img/speuren.png')} style={{
-          bottom: -30,
-          position: 'absolute',
-          right: -imageOffset,
-          transform: [{ translateX: this.state.speurTranslateX }],
-        }} />
+        <AnimatedImage
+          source={require('./img/speuren.png')}
+          offset={{ bottom: -30, right: -75 }}
+          ref={image => this.image = image}
+        />
       </Container>
     )
   }
