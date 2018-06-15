@@ -123,7 +123,7 @@ export default class PickLocation extends React.Component {
             style={{ flexGrow: 1 }}
           >
             {this.state.location && (
-              <MapView.Marker coordinate={this.state.location} image={require('./img/marker.png')} draggable />
+              <MapView.Marker coordinate={this.state.location} image={this.props.marker || require('./img/marker.png')} draggable />
             )}
           </MapView>
         </Animated.View>
