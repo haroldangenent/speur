@@ -11,12 +11,13 @@ export default class App extends React.Component {
   components = [
     { View: Home },
     { View: StartLocation, onChange: startLocation => this.setState({ startLocation }) },
-    { View: EndLocation, validate: () => this.state.startLocation },
+    { View: EndLocation, onChange: endLocation => this.setState({ endLocation }), validate: () => this.state.startLocation },
   ]
   screens = []
   state = {
     disableMode: false,
     fontsLoaded: false,
+    endLocation: false,
     startLocation: false,
   }
 
