@@ -16,8 +16,10 @@ export default class EndLocation extends React.Component {
         title: 'Wat is je eindpunt?',
         shortTitle: 'Eindpunt',
       }}
+      initialRegion={this.props.startLocation()}
       marker={require('./img/end.png')}
       onChange={this.props.onChange}
+      otherMarkers={[this.props.startLocation()]}
       setDisableMode={this.props.setDisableMode}
       ref={picker => this.picker = picker} />
   }

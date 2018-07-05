@@ -14,14 +14,14 @@ export default class PickLocation extends React.Component {
   }
 
   componentWillMount() {
-    navigator.geolocation.getCurrentPosition(position => this.setState({
-      userLocation: {
-        latitude: position.coords.latitude,
-        latitudeDelta: 0.04,
-        longitude: position.coords.longitude,
-        longitudeDelta: 0.04,
-      },
-    }))
+    if (!this.props.initialRegion) {
+      navigator.geolocation.getCurrentPosition(position => this.setState({
+        userLocation: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        },
+      }))
+    }
   }
 
   transitionIn(fromRight) {
@@ -117,11 +117,18 @@ export default class PickLocation extends React.Component {
           )}
           
           <MapView
-            initialRegion={this.state.userLocation}
+            initialRegion={(this.props.initialRegion || this.state.userLocation) && {
+              ...(this.props.initialRegion || this.state.userLocation),
+              latitudeDelta: 0.04,
+              longitudeDelta: 0.04,
+            }}
             onPress={event => this.setLocation(event.nativeEvent.coordinate)}
             showsUserLocation={true}
             style={{ flexGrow: 1 }}
           >
+            {this.props.otherMarkers && this.props.otherMarkers.map((location, index) => (
+              <MapView.Marker key={index} coordinate={location} image={require('./img/marker.png')} />
+            ))}
             {this.state.location && (
               <MapView.Marker coordinate={this.state.location} image={this.props.marker || require('./img/marker.png')} draggable />
             )}

@@ -21,6 +21,7 @@ export default class App extends React.Component {
       View: EndLocation,
       props: {
         onChange: endLocation => this.setState({ endLocation }),
+        startLocation: () => this.state.startLocation,
       },
       validate: () => this.state.startLocation
     },
