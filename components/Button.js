@@ -13,6 +13,6 @@ export default ({ children, onPress }) => (
     <Text style={{
       color: colors.orange,
       fontFamily: 'work-sans-semi-bold',
-    }}>{children.toUpperCase()}</Text>
+    }}>{children}</Text>
   </TouchableOpacity>
 )
