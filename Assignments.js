@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, TouchableOpacity, Animated, Easing } from 'react-native'
+import { View, Animated, Easing } from 'react-native'
+import Assignment from './components/Assignment'
 import Button from './components/Button'
 import Container from './components/Container'
 import Title from './components/Title'
@@ -45,9 +46,19 @@ export default class Assignments extends React.Component {
   }
 
   addLocation(coordinate) {
-    this.setState({ locations: [...this.state.locations, {
-      coordinate
-    }] })
+    if (! this.getWorkingLocation()) {
+      this.setState({ locations: [...this.state.locations, {
+        coordinate,
+        done: false,
+      }] })
+      this.map.animateToCoordinate(coordinate)
+    }
+  }
+
+  getWorkingLocation() {
+    const workingLocation = this.state.locations.filter(location => !location.done)
+
+    return workingLocation.length > 0 ? workingLocation : false
   }
 
   render() {
@@ -76,7 +87,7 @@ export default class Assignments extends React.Component {
           shadowRadius: 10,
           shadowOpacity: 0.1,
           transform: [{ translateX: this.state.mapTranslateX }],
-        }}>          
+        }}>      
           <MapView
             initialRegion={{
               latitude: this.props.startLocation().latitude,
@@ -85,14 +96,22 @@ export default class Assignments extends React.Component {
               longitudeDelta: 0.04,
             }}
             onPress={event => this.addLocation(event.nativeEvent.coordinate)}
+            ref={map => this.map = map}
+            rotateEnabled={!this.getWorkingLocation()}
+            scrollEnabled={!this.getWorkingLocation()}
             showsUserLocation={true}
             style={{ flexGrow: 1 }}
+            zoomEnabled={!this.getWorkingLocation()}
           >
             <MapView.Marker coordinate={this.props.startLocation()} image={require('./img/marker.png')} style={{ opacity: 0.5 }} />
             <MapView.Marker coordinate={this.props.endLocation()} image={require('./img/end.png')} style={{ opacity: 0.5 }} />
 
             {this.state.locations.map((location, index) => (
-              <MapView.Marker key={index} coordinate={location.coordinate} image={require('./img/marker.png')} draggable />
+              <MapView.Marker key={index} coordinate={location.coordinate} image={require('./img/marker.png')} draggable>
+                {this.getWorkingLocation() && (
+                  <Assignment />
+                )}
+              </MapView.Marker>
             ))}
           </MapView>
         </Animated.View>
